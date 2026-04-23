@@ -91,19 +91,24 @@ Auth header format:
 Authorization: Bearer <token>
 ```
 
-## Screenshots
+## Website Preview (From index.html)
 
-### Homepage
+These are the main sections users see on the homepage:
 
-![Homepage](images/bg5.jpg)
+- Home: Welcome banner and primary call-to-action
+- About: Brand story, values, and bakery highlights
+- Menu: Product cards with filtering and add-to-cart actions
+- Blog: Blog grid with links to blog1.html through blog9.html
+- Reviews: Customer testimonials section
+- Contact: Contact form and reach-out details
 
-### Bakery Visual
+Quick page previews:
 
-![Bakery Visual](images/baking.png)
-
-### Product Theme
-
-![Product Theme](images/cookiebox.jpg)
+- Main site: [index.html](index.html)
+- Sign in: [signin.html](signin.html)
+- Sign up: [signup.html](signup.html)
+- Customer shop: [shop/customer-shop.js](shop/customer-shop.js)
+- Admin dashboard: [admin-portal/admin-dashboard.html](admin-portal/admin-dashboard.html)
 
 ## Notes
 
