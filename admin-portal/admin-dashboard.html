@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Bite of Bliss</title>
+    <link rel="stylesheet" href="../stylesheet.css" />
+    <link rel="stylesheet" href="../shop/customer-shop.css" />
+    <style>
+      body {
+        background: #fff7ed;
+        color: #2f261f;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .admin-shell {
+        max-width: 1200px;
+        margin: 36px auto;
+        padding: 0 20px;
+      }
+
+      .admin-shell section {
+        min-height: auto;
+        padding: 8px 0;
+      }
+
+      .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 6px;
+      }
+
+      .admin-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .admin-link,
+      .danger-btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .admin-link {
+        background: #d66b00;
+        color: #fff;
+      }
+
+      .secondary-btn {
+        border: 1px solid #ddcdb9;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        background: #fff;
+        color: #2f261f;
+      }
+
+      .danger-btn {
+        background: #b42318;
+        color: #fff;
+      }
+
+      .admin-grid {
+        margin-top: 20px;
+      }
+
+      .panel {
+        background: #fff;
+        border: 1px solid #f0dec9;
+        border-radius: 14px;
+        padding: 18px;
+      }
+
+      .stats-grid {
+        margin-top: 12px;
+        margin-bottom: 14px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+      }
+
+      .stat-card {
+        background: #fff;
+        border: 1px solid #f0dec9;
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .stat-label {
+        color: #6d625a;
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
+      .stat-value {
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-top: 4px;
+      }
+
+      .controls-row {
+        margin-top: 8px;
+        margin-bottom: 14px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .controls-row input,
+      .controls-row select {
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #ddcdb9;
+        min-width: 180px;
+      }
+
+      .controls-row .small-note {
+        margin-left: auto;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 14px 12px;
+        border-bottom: 1px solid #f4e7d8;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      select,
+      .save-status-btn,
+      .delete-order-btn {
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .save-status-btn {
+        background: #d66b00;
+        color: #fff;
+      }
+
+      .delete-order-btn {
+        background: #b42318;
+        color: #fff;
+        margin-left: 8px;
+      }
+
+      .admin-msg {
+        margin-top: 12px;
+        min-height: 20px;
+      }
+
+      .admin-msg.error {
+        color: #a82020;
+      }
+
+      .admin-msg.success {
+        color: #14633e;
+      }
+
+      .small-note {
+        color: #6d625a;
+        font-size: 0.95rem;
+      }
+
+      .inventory-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .inventory-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .stock-input {
+        width: 88px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #ddcdb9;
+      }
+
+      .stock-save-btn {
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        background: #d66b00;
+        color: #fff;
+      }
+
+      .stock-pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .stock-pill.in-stock {
+        background: #dcfce7;
+        color: #14532d;
+      }
+
+      .stock-pill.low-stock {
+        background: #fff4d9;
+        color: #8a6500;
+      }
+
+      .stock-pill.out-of-stock {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .inventory-row.low-stock {
+        background: #fffdf6;
+      }
+
+      .inventory-row.out-of-stock {
+        background: #fff7f7;
+      }
+
+    </style>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <div class="admin-header">
+        <div>
+          <h1>Admin Dashboard</h1>
+          <p class="small-note">Manage orders, update statuses, and delete records.</p>
+        </div>
+        <div class="admin-actions">
+          <button id="refreshOrdersBtn" class="admin-link">Refresh Orders</button>
+          <button id="exportOrdersBtn" class="secondary-btn">Export CSV</button>
+          <button id="logoutAdminBtn" class="danger-btn">Logout</button>
+        </div>
+      </div>
+
+      <p id="adminAccessMessage" class="admin-msg"></p>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-label">Total Orders</div>
+          <div id="statTotalOrders" class="stat-value">0</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Pending Orders</div>
+          <div id="statPendingOrders" class="stat-value">0</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Delivered Orders</div>
+          <div id="statDeliveredOrders" class="stat-value">0</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-label">Revenue</div>
+          <div id="statRevenue" class="stat-value">₹0</div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Orders</h2>
+        <div class="controls-row">
+          <input id="orderSearchInput" type="search" placeholder="Search by order ID, customer or email" />
+          <select id="orderStatusFilter">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="preparing">Preparing</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <span id="orderCountLabel" class="small-note">Showing 0 of 0 orders</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr>
+                <td colspan="6">Loading orders...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top: 18px;">
+        <h2>Inventory</h2>
+        <p class="small-note">Track stock, mark low inventory, and update quantities directly from the dashboard.</p>
+        <div class="controls-row">
+          <input id="inventorySearchInput" type="search" placeholder="Search product or category" />
+          <select id="inventoryStockFilter">
+            <option value="">All stock</option>
+            <option value="in-stock">In stock</option>
+            <option value="low-stock">Low stock</option>
+            <option value="out-of-stock">Out of stock</option>
+          </select>
+          <span id="inventoryCountLabel" class="small-note">Showing 0 of 0 products</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock Status</th>
+                <th>Stock</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+              <tr>
+                <td colspan="6">Loading inventory...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="admin-dashboard.js"></script>
+  </body>
+</html>
