@@ -101,6 +101,14 @@ Open the main site pages here:
 - [Admin Dashboard](admin-portal/admin-dashboard.html)
 - [Admin Orders](shop/admin-orders.html)
 
+## GitHub Pages
+
+Live site:
+
+- https://TanveeerSingh.github.io/bite-of-bliss/
+
+If GitHub still shows the deployment as pending, open repository settings and make sure Pages is set to deploy from GitHub Actions.
+
 ## Notes
 
 - Admin-only endpoints require a user with role `admin`.

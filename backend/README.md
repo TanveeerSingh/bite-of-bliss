@@ -91,3 +91,7 @@ Open the connected frontend pages here:
 - [Sign In](../signin.html)
 - [Sign Up](../signup.html)
 - [Admin Dashboard](../admin-portal/admin-dashboard.html)
+
+GitHub Pages live site:
+
+- https://TanveeerSingh.github.io/bite-of-bliss/
