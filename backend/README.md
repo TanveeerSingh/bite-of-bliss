@@ -1,61 +1,91 @@
-Bakery Backend API (MongoDB + Express)
+# Backend API (Bite of Bliss)
 
-This backend is intentionally kept simple so it is easy to learn and maintain.
+Express + MongoDB backend that powers authentication, product management, and order flows.
 
-Tech used
+## Stack
+
 - Node.js
 - Express
 - MongoDB with Mongoose
 - JWT authentication
+- bcryptjs password hashing
 
-How to run
-1. Open terminal in backend folder
-2. Install dependencies
-   npm install
-3. Start server
-   npm run dev
+## Run Backend
 
-Default config
-- Port: 5001 (or value from PORT in .env)
-- MongoDB URI: from MONGO_URI in .env
+```bash
+cd backend
+npm install
+npm run dev
+```
 
-Auth routes
-- POST /api/auth/register
-  body: { name, email, password }
-- POST /api/auth/login
-  body: { email, password }
+Production start:
 
-Product routes
-- GET /api/products
-- GET /api/products/:id
-- POST /api/products (admin only)
-- PUT /api/products/:id (admin only)
-- DELETE /api/products/:id (admin only)
+```bash
+npm start
+```
 
-Order routes
-- POST /api/orders (logged-in user)
-  body: { items: [{ productId, quantity }], shippingAddress }
-- GET /api/orders/my-orders (logged-in user)
-- GET /api/orders (admin only)
-- PUT /api/orders/:id/status (admin only)
-  body: { status }
+## Environment Variables
 
-Auth header format
-- Authorization: Bearer <token>
+Create `backend/.env`:
 
-How to make an admin user
-- Register a user first
-- In MongoDB, set that user's role field to admin
+```env
+PORT=5001
+MONGO_URI=mongodb://127.0.0.1:27017/bakeryDB
+JWT_SECRET=your_secret_here
+```
 
-Project structure
-- server.js
-- models/
-- controllers/
-- routes/
-- middleware/
+## API Routes
 
-This layout keeps each file focused on one job:
-- models define data shape
-- controllers contain business logic
-- routes map endpoints to controllers
-- middleware handles shared checks like authentication
+Base URL: `http://localhost:5001/api`
+
+### Auth
+
+- `POST /auth/register`
+  - body: `{ name, email, password }`
+- `POST /auth/login`
+  - body: `{ email, password }`
+
+### Products
+
+- `GET /products`
+- `GET /products/:id`
+- `POST /products` (admin only)
+- `PUT /products/:id` (admin only)
+- `DELETE /products/:id` (admin only)
+- `POST /products/bootstrap` (seed initial products)
+
+### Orders
+
+- `POST /orders` (authenticated user)
+  - body: `{ items: [{ productId, quantity }], shippingAddress }`
+- `GET /orders/my-orders` (authenticated user)
+- `GET /orders` (admin only)
+- `PUT /orders/:id/status` (admin only)
+  - body: `{ status }`
+- `DELETE /orders/:id` (admin only)
+
+## Authorization Header
+
+```text
+Authorization: Bearer <token>
+```
+
+## Promote User to Admin
+
+1. Register the user normally.
+2. In MongoDB, set the user document field `role` to `admin`.
+
+## Folder Overview
+
+- `server.js`: app bootstrap and middleware setup
+- `models/`: Mongoose schemas
+- `controllers/`: business logic
+- `routes/`: API endpoint mappings
+- `middleware/`: shared auth and role checks
+
+## Screenshots / Visual References
+
+Project images used in the frontend theme:
+
+![Bakery Theme](../images/bg5.jpg)
+![Baking Visual](../images/baking.png)
