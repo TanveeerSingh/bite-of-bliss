@@ -83,20 +83,9 @@ Authorization: Bearer <token>
 - `routes/`: API endpoint mappings
 - `middleware/`: shared auth and role checks
 
-## Frontend Website Preview (index.html)
+## Screenshots / Visual References
 
-For UI preview and user flow context, review these frontend sections:
+Project images used in the frontend theme:
 
-- Home hero section
-- About section
-- Menu catalog with add-to-cart controls
-- Blog listing with blog detail pages
-- Reviews section
-- Contact section
-
-Relevant files:
-
-- [index.html](../index.html)
-- [stylesheet.css](../stylesheet.css)
-- [shop/customer-shop.js](../shop/customer-shop.js)
-- [admin-portal/admin-dashboard.html](../admin-portal/admin-dashboard.html)
+![Bakery Theme](../images/bg5.jpg)
+![Baking Visual](../images/baking.png)
