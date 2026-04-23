@@ -91,19 +91,15 @@ Auth header format:
 Authorization: Bearer <token>
 ```
 
-## Screenshots
+## Website Preview
 
-### Homepage
+Open the main site pages here:
 
-![Homepage](images/bg5.jpg)
-
-### Bakery Visual
-
-![Bakery Visual](images/baking.png)
-
-### Product Theme
-
-![Product Theme](images/cookiebox.jpg)
+- [Homepage](index.html)
+- [Sign In](signin.html)
+- [Sign Up](signup.html)
+- [Admin Dashboard](admin-portal/admin-dashboard.html)
+- [Admin Orders](shop/admin-orders.html)
 
 ## Notes
 

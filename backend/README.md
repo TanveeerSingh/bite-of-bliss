@@ -83,9 +83,11 @@ Authorization: Bearer <token>
 - `routes/`: API endpoint mappings
 - `middleware/`: shared auth and role checks
 
-## Screenshots / Visual References
+## Website Preview
 
-Project images used in the frontend theme:
+Open the connected frontend pages here:
 
-![Bakery Theme](../images/bg5.jpg)
-![Baking Visual](../images/baking.png)
+- [Homepage](../index.html)
+- [Sign In](../signin.html)
+- [Sign Up](../signup.html)
+- [Admin Dashboard](../admin-portal/admin-dashboard.html)
