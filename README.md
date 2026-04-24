@@ -103,11 +103,10 @@ Open the main site pages here:
 
 ## GitHub Pages
 
-Live site:
+[![Deploy to GitHub Pages](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml/badge.svg)](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml)
 
-- https://TanveeerSingh.github.io/bite-of-bliss/
+Live site: [https://tanveeersingh.github.io/bite-of-bliss/](https://tanveeersingh.github.io/bite-of-bliss/)
 
-If GitHub still shows the deployment as pending, open repository settings and make sure Pages is set to deploy from GitHub Actions.
 
 ## Notes
 
