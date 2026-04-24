@@ -2,6 +2,12 @@
 
 Bite of Bliss is a bakery web project with a customer-facing site, admin management pages, and a Node.js + MongoDB backend API.
 
+## GitHub Pages
+
+[![Deploy to GitHub Pages](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml/badge.svg)](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml)
+
+Live site: [https://tanveeersingh.github.io/bite-of-bliss/](https://tanveeersingh.github.io/bite-of-bliss/)
+
 ## Features
 
 - Customer pages for browsing products and placing orders
@@ -100,13 +106,6 @@ Open the main site pages here:
 - [Sign Up](signup.html)
 - [Admin Dashboard](admin-portal/admin-dashboard.html)
 - [Admin Orders](shop/admin-orders.html)
-
-## GitHub Pages
-
-[![Deploy to GitHub Pages](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml/badge.svg)](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml)
-
-Live site: [https://tanveeersingh.github.io/bite-of-bliss/](https://tanveeersingh.github.io/bite-of-bliss/)
-
 
 ## Notes
 
