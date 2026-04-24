@@ -104,6 +104,7 @@ Open the main site pages here:
 - [Homepage](index.html)
 - [Sign In](signin.html)
 - [Sign Up](signup.html)
+- [Admin Login](admin-portal/admin-login.html)
 - [Admin Dashboard](admin-portal/admin-dashboard.html)
 - [Admin Orders](shop/admin-orders.html)
 
