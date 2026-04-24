@@ -8,6 +8,8 @@ Bite of Bliss is a bakery web project with a customer-facing site, admin managem
 
 Live site: [https://tanveeersingh.github.io/bite-of-bliss/](https://tanveeersingh.github.io/bite-of-bliss/)
 
+Admin live: [https://tanveeersingh.github.io/bite-of-bliss/admin-portal/admin-login.html](https://tanveeersingh.github.io/bite-of-bliss/admin-portal/admin-login.html)
+
 ## Features
 
 - Customer pages for browsing products and placing orders
