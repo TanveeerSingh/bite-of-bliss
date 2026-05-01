@@ -1,5 +1,5 @@
 (function () {
-  const API_BASE = "http://localhost:5001/api";
+  const API_BASE = "https://bite-of-bliss-production.up.railway.app/api";
   const STATUS_OPTIONS = ["pending", "confirmed", "preparing", "delivered", "cancelled"];
 
   const tableBody = document.getElementById("ordersTableBody");

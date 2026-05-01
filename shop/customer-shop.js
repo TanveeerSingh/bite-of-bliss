@@ -1,5 +1,5 @@
 (function () {
-  const API_BASE = "http://localhost:5001/api";
+  const API_BASE = "https://bite-of-bliss-production.up.railway.app/api";
   const CART_KEY = "bobCartV1";
 
   const shopGrid = document.getElementById("shopGrid");
