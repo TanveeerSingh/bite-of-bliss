@@ -938,8 +938,24 @@
         font-weight: 500;
       }
 
+      .menu-arrival-btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        border: 2px solid #e67e22;
+        border-radius: 25px;
+        color: #e67e22;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
       .filter-btn.active,
       .filter-btn:hover {
+        background: #e67e22;
+        color: white;
+      }
+
+      .menu-arrival-btn:hover {
         background: #e67e22;
         color: white;
       }
@@ -1103,6 +1119,11 @@
         }
 
         .filter-btn {
+          padding: 0.6rem 1.2rem;
+          font-size: 0.9rem;
+        }
+
+        .menu-arrival-btn {
           padding: 0.6rem 1.2rem;
           font-size: 0.9rem;
         }
@@ -1290,9 +1311,61 @@
 .btn-filled:hover {
   background: #d35400;
 }
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.hero-buttons .btn-new-arrival,
+.hero-buttons .btn-new-arrival:link,
+.hero-buttons .btn-new-arrival:visited,
+.hero-buttons .btn-new-arrival:hover,
+.hero-buttons .btn-new-arrival:active,
+.hero-buttons .btn-new-arrival:focus,
+.hero-buttons .btn-new-arrival:focus-visible {
+  display: inline-block;
+  margin-top: 0;
+  min-width: 160px;
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff;
+  text-decoration: none !important;
+  background: linear-gradient(45deg, #ff7a00, #ff3c00) !important;
+  box-shadow: 0 0 15px rgba(255, 122, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.hero-buttons .btn-new-arrival:hover,
+.hero-buttons .btn-new-arrival:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(255, 122, 0, 0.9);
+}
+
 .auth-nav {
   position: absolute;
   right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-welcome {
+  display: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #fff3e8;
+  color: #b65a00;
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 
 .logout-btn {
@@ -1308,4 +1381,12 @@
 
 .logout-btn:hover {
   background: #d35400;
+}
+
+.home-welcome {
+  display: none;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-right: 6px;
 }

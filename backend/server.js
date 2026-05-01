@@ -54,4 +54,24 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5001;
-app.listen(PORT);
+app.listen(PORT, () => {
+  const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5500/index.html";
+  let adminPortalUrl = process.env.ADMIN_PORTAL_URL;
+
+  if (!adminPortalUrl) {
+    try {
+      const parsedFrontendUrl = new URL(frontendUrl);
+      parsedFrontendUrl.pathname = "/admin-portal/admin-login.html";
+      parsedFrontendUrl.search = "";
+      parsedFrontendUrl.hash = "";
+      adminPortalUrl = parsedFrontendUrl.toString();
+    } catch (error) {
+      adminPortalUrl = "http://localhost:5500/admin-portal/admin-login.html";
+    }
+  }
+
+  console.log(`Frontend: ${frontendUrl}`);
+  console.log(`Admin Portal: ${adminPortalUrl}`);
+  console.log(`Backend running at http://localhost:${PORT}`);
+  console.log(`API base: http://localhost:${PORT}/api`);
+});

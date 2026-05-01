@@ -204,15 +204,17 @@
       .map((product) => {
         const stock = Number(product.stock) || 0;
         const statusClass = stockStatusClass(stock);
+        const price = Number(product.price) || 0;
+        const category = product.category || "general";
 
         return (
           '<tr class="inventory-row ' + statusClass + '">' +
           '<td><strong>' + product.name + '</strong></td>' +
-          '<td>' + (product.category || "general") + '</td>' +
-          '<td>' + currency(product.price) + '</td>' +
+          '<td><span class="category-label">' + category + '</span></td>' +
+          '<td><input class="price-input" type="number" min="0" step="1" value="' + price + '" data-field="price" data-product-id="' + product._id + '" /></td>' +
           '<td><span class="stock-pill ' + statusClass + '">' + stockStatusLabel(stock) + '</span></td>' +
-          '<td><input class="stock-input" type="number" min="0" value="' + stock + '" data-product-id="' + product._id + '" /></td>' +
-          '<td><button class="stock-save-btn" data-product-id="' + product._id + '">Save Stock</button></td>' +
+          '<td><input class="stock-input" type="number" min="0" value="' + stock + '" data-field="stock" data-product-id="' + product._id + '" /></td>' +
+          '<td><button class="stock-save-btn" data-product-id="' + product._id + '">Save Changes</button></td>' +
           '</tr>'
         );
       })
@@ -221,8 +223,13 @@
     inventoryTableBody.querySelectorAll(".stock-save-btn").forEach((button) => {
       button.addEventListener("click", () => {
         const productId = button.getAttribute("data-product-id");
-        const input = inventoryTableBody.querySelector('input[data-product-id="' + productId + '"]');
-        updateProductStock(productId, input ? input.value : "0");
+        const priceInput = inventoryTableBody.querySelector('input[data-field="price"][data-product-id="' + productId + '"]');
+        const stockInput = inventoryTableBody.querySelector('input[data-field="stock"][data-product-id="' + productId + '"]');
+
+        updateProduct(productId, {
+          price: priceInput ? priceInput.value : "0",
+          stock: stockInput ? stockInput.value : "0",
+        });
       });
     });
   }
@@ -234,6 +241,7 @@
 
     try {
       const response = await fetch(API_BASE + "/products", {
+        cache: "no-store",
         headers: { Authorization: "Bearer " + token() },
       });
 
@@ -249,8 +257,9 @@
     }
   }
 
-  async function updateProductStock(productId, stockValue) {
-    const stock = Math.max(0, Number(stockValue) || 0);
+  async function updateProduct(productId, payload) {
+    const price = Math.max(0, Number(payload.price) || 0);
+    const stock = Math.max(0, Number(payload.stock) || 0);
 
     try {
       const response = await fetch(API_BASE + "/products/" + productId, {
@@ -259,7 +268,7 @@
           "Content-Type": "application/json",
           Authorization: "Bearer " + token(),
         },
-        body: JSON.stringify({ stock: stock }),
+        body: JSON.stringify({ price: price, stock: stock }),
       });
 
       const data = await response.json();
@@ -267,7 +276,7 @@
         throw new Error(data.error || "Failed to update stock");
       }
 
-      setMessage("Stock updated.", "success");
+      setMessage("Product updated.", "success");
       fetchInventory();
     } catch (error) {
       setMessage(error.message, "error");
@@ -291,6 +300,7 @@
 
     try {
       const response = await fetch(API_BASE + "/orders", {
+        cache: "no-store",
         headers: { Authorization: "Bearer " + token() },
       });
       const data = await response.json();
@@ -396,7 +406,11 @@
     }
   }
 
-  refreshOrdersBtn.addEventListener("click", fetchOrders);
+  async function refreshDashboard() {
+    await Promise.all([fetchOrders(), fetchInventory()]);
+  }
+
+  refreshOrdersBtn.addEventListener("click", refreshDashboard);
   if (exportOrdersBtn) {
     exportOrdersBtn.addEventListener("click", exportOrdersAsCsv);
   }

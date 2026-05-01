@@ -17,6 +17,11 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
   try {
+    await Product.deleteMany({ name: "123" });
+    await Product.updateMany(
+      { name: "Apple Cider Donuts", category: { $ne: "winter" } },
+      { $set: { category: "winter" } }
+    );
     const products = await Product.find().sort({ createdAt: -1 });
     res.json(products);
   } catch (err) {
@@ -27,6 +32,11 @@ exports.getProducts = async (req, res) => {
 exports.bootstrapProducts = async (req, res) => {
   try {
     // Seed the catalog the first time the database is empty.
+    await Product.deleteMany({ name: "123" });
+    await Product.updateMany(
+      { name: "Apple Cider Donuts", category: { $ne: "winter" } },
+      { $set: { category: "winter" } }
+    );
     const defaults = [
       { name: "Artisan Sourdough", price: 249, category: "bread", description: "Traditional sourdough bread made with organic flour", stock: 50 },
       { name: "Vegan Blueberry Muffins", price: 199, category: "muffin", description: "Made with fresh blueberries and almond milk", stock: 50 },

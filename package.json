@@ -1,0 +1,14 @@
+{
+  "name": "bite-of-bliss",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:frontend": "http-server . -p 5500",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

@@ -203,6 +203,20 @@
         border: 1px solid #ddcdb9;
       }
 
+      .price-input {
+        width: 110px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #ddcdb9;
+      }
+
+      .category-input {
+        width: 130px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #ddcdb9;
+      }
+
       .stock-save-btn {
         padding: 8px 10px;
         border-radius: 8px;
@@ -243,6 +257,24 @@
 
       .inventory-row.out-of-stock {
         background: #fff7f7;
+      }
+
+      .product-form {
+        margin-top: 14px;
+        margin-bottom: 14px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+      }
+
+      .product-form input {
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #ddcdb9;
+      }
+
+      .product-form .admin-link {
+        justify-self: start;
       }
 
     </style>
@@ -319,7 +351,7 @@
 
       <section class="panel" style="margin-top: 18px;">
         <h2>Inventory</h2>
-        <p class="small-note">Track stock, mark low inventory, and update quantities directly from the dashboard.</p>
+        <p class="small-note">Update price and stock directly from the dashboard.</p>
         <div class="controls-row">
           <input id="inventorySearchInput" type="search" placeholder="Search product or category" />
           <select id="inventoryStockFilter">
