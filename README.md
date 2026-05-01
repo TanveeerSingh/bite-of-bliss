@@ -2,6 +2,8 @@
 
 Bite of Bliss is a bakery web project with a customer-facing site, admin management pages, and a Node.js + MongoDB backend API.
 
+**📖 [Read the Complete Admin Guide](ADMIN_GUIDE.md)** - Learn how to set up admin accounts and manage your bakery!
+
 ## GitHub Pages
 
 [![Deploy to GitHub Pages](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml/badge.svg)](https://github.com/TanveeerSingh/bite-of-bliss/actions/workflows/pages.yml)
@@ -114,3 +116,90 @@ Open the main site pages here:
 
 - Admin-only endpoints require a user with role `admin`.
 - To promote a user as admin, update that user record in MongoDB.
+
+---
+
+## 👨‍💼 Admin Access Guide
+
+### How to Become an Admin
+
+There are two ways to get admin access:
+
+#### **Option 1: Manually Promote via MongoDB** (Recommended for testing)
+
+1. **Sign up** as a regular customer on the website
+2. **Access MongoDB**:
+   - Go to [MongoDB Atlas](https://cloud.mongodb.com) → Your Cluster
+   - Click "Collections" → `bakeryDB` → `users`
+   - Find your user document
+3. **Update the role**:
+   - Change the `role` field from `"customer"` to `"admin"`
+   - Save the changes
+4. **Sign in to Admin Portal**:
+   - Visit [Admin Login](admin-portal/admin-login.html)
+   - Use the same email and password you signed up with
+   - You now have full admin access!
+
+#### **Option 2: Create Admin Account Directly** (For production)
+
+```javascript
+// Connect to MongoDB and run:
+db.users.insertOne({
+  name: "Admin User",
+  email: "admin@biteofbliss.com",
+  password: "hashed_password_here", // Use bcryptjs to hash
+  role: "admin",
+  timestamps: new Date()
+})
+```
+
+### What Admins Can Do
+
+Once logged in as admin, access the **Admin Dashboard** to:
+
+#### 📊 **Order Management**
+- View all customer orders
+- Update order status (pending → confirmed → preparing → delivered → cancelled)
+- Delete orders if needed
+- Export order data as CSV
+
+#### 🍰 **Inventory Management**
+- Add new bakery products
+- Edit product details (name, price, description)
+- Delete products
+- Manage product availability
+
+#### 🔐 **Admin Features**
+- Real-time order updates
+- Secure admin authentication
+- Admin logout option
+
+### Admin Portal URLs
+
+- **Admin Login**: `/admin-portal/admin-login.html`
+- **Admin Dashboard**: `/admin-portal/admin-dashboard.html`
+- **Admin Orders View**: `/shop/admin-orders.html`
+
+### Admin API Endpoints (Protected)
+
+All admin endpoints require:
+1. Valid JWT token from admin account
+2. User role must be `"admin"`
+
+**Header format**:
+```
+Authorization: Bearer <admin_token>
+```
+
+**Available Admin Routes**:
+
+```
+POST   /api/products              - Create product
+PUT    /api/products/:id          - Update product
+DELETE /api/products/:id          - Delete product
+GET    /api/orders                - View all orders
+PUT    /api/orders/:id/status     - Update order status
+DELETE /api/orders/:id            - Delete order
+```
+
+---
