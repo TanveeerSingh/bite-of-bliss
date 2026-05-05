@@ -6,11 +6,20 @@ const {
 	bootstrapProducts,
 	getProductById,
 	updateProduct,
-	deleteProduct
+	deleteProduct,
+	// aggregation
+	getProductStatsByCategory,
+	getLowStockProducts,
+	getPriceRangeAnalysis
 } = require("../controllers/productController");
 const { protect, adminOnly } = require("../middleware/authMiddleware");
 
-// Public read access, admin write access.
+// aggregation
+router.get("/analytics/stats-by-category", protect, adminOnly, getProductStatsByCategory);
+router.get("/analytics/low-stock", protect, adminOnly, getLowStockProducts);
+router.get("/analytics/price-range", protect, adminOnly, getPriceRangeAnalysis);
+
+// CRUD
 router.post("/", protect, adminOnly, createProduct);
 router.post("/bootstrap", bootstrapProducts);
 router.get("/", getProducts);

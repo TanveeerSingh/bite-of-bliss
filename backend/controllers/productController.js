@@ -17,12 +17,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
   try {
-    await Product.deleteMany({ name: "123" });
-    await Product.updateMany(
-      { name: "Apple Cider Donuts", category: { $ne: "winter" } },
-      { $set: { category: "winter" } }
-    );
-    const products = await Product.find().sort({ createdAt: -1 });
+    const products = await Product.find().sort({ _id: -1 });
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -32,11 +27,6 @@ exports.getProducts = async (req, res) => {
 exports.bootstrapProducts = async (req, res) => {
   try {
     // Seed the catalog the first time the database is empty.
-    await Product.deleteMany({ name: "123" });
-    await Product.updateMany(
-      { name: "Apple Cider Donuts", category: { $ne: "winter" } },
-      { $set: { category: "winter" } }
-    );
     const defaults = [
       { name: "Artisan Sourdough", price: 249, category: "bread", description: "Traditional sourdough bread made with organic flour", stock: 50 },
       { name: "Vegan Blueberry Muffins", price: 199, category: "muffin", description: "Made with fresh blueberries and almond milk", stock: 50 },
@@ -89,7 +79,7 @@ exports.updateProduct = async (req, res) => {
   try {
     // Updates go straight into MongoDB so inventory stays simple.
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true
     });
 
@@ -112,6 +102,79 @@ exports.deleteProduct = async (req, res) => {
     }
 
     res.json({ message: "Product deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// aggregation
+exports.getProductStatsByCategory = async (req, res) => {
+  try {
+    const stats = await Product.aggregate([
+      {
+        $group: {
+          _id: "$category",
+          totalProducts: { $sum: 1 },
+          avgPrice: { $avg: "$price" },
+          totalStock: { $sum: "$stock" }
+        }
+      },
+      { $sort: { totalProducts: -1 } }
+    ]);
+
+    res.json(stats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// aggregation
+exports.getLowStockProducts = async (req, res) => {
+  try {
+    const threshold = req.query.threshold || 20; // Default: show products with stock < 20
+
+    const lowStockProducts = await Product.aggregate([
+      { $match: { stock: { $lt: parseInt(threshold) } } },
+      { $sort: { stock: 1 } }
+    ]);
+
+    res.json(lowStockProducts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// aggregation
+exports.getPriceRangeAnalysis = async (req, res) => {
+  try {
+    const analysis = await Product.aggregate([
+      {
+        $project: {
+          name: 1,
+          price: 1,
+          stock: 1,
+          category: 1,
+          priceRange: {
+            $cond: [
+              { $lt: ["$price", 200] },
+              "Budget",
+              { $cond: [{ $lt: ["$price", 350] }, "Mid-Range", "Premium"] }
+            ]
+          }
+        }
+      },
+      {
+        $group: {
+          _id: "$priceRange",
+          count: { $sum: 1 },
+          avgPrice: { $avg: "$price" },
+          avgStock: { $avg: "$stock" }
+        }
+      },
+      { $sort: { _id: 1 } }
+    ]);
+
+    res.json(analysis);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

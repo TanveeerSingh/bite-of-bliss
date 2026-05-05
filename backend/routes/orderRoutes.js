@@ -5,11 +5,20 @@ const {
   getMyOrders,
   getAllOrders,
   updateOrderStatus,
-  deleteOrder
+  deleteOrder,
+  // aggregation
+  getOrderStatsByStatus,
+  getRevenueByProduct,
+  getCustomerOrderSummary
 } = require("../controllers/orderController");
 const { protect, adminOnly } = require("../middleware/authMiddleware");
 
-// Customers place orders here, admins manage them below.
+// aggregation
+router.get("/analytics/stats-by-status", protect, adminOnly, getOrderStatsByStatus);
+router.get("/analytics/revenue-by-product", protect, adminOnly, getRevenueByProduct);
+router.get("/analytics/customer-summary", protect, adminOnly, getCustomerOrderSummary);
+
+// CRUD
 router.post("/", protect, createOrder);
 router.get("/my-orders", protect, getMyOrders);
 router.get("/", protect, adminOnly, getAllOrders);

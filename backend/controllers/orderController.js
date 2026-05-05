@@ -34,7 +34,7 @@ exports.createOrder = async (req, res) => {
       if (quantity < 1) {
         return res.status(400).json({ error: "Quantity must be at least 1" });
       }
-
+      //stock reduction logic
       const availableStock = Number(product.stock) || 0;
       if (availableStock < quantity) {
         return res.status(400).json({
@@ -72,7 +72,7 @@ exports.createOrder = async (req, res) => {
 
 exports.getMyOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
+    const orders = await Order.find({ user: req.user._id }).sort({ _id: -1 });
     res.json(orders);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -83,7 +83,7 @@ exports.getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find()
       .populate("user", "name email")
-      .sort({ createdAt: -1 });
+      .sort({ _id: -1 });
 
     res.json(orders);
   } catch (err) {
@@ -104,7 +104,7 @@ exports.updateOrderStatus = async (req, res) => {
     const order = await Order.findByIdAndUpdate(
       req.params.id,
       { status },
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!order) {
@@ -126,6 +126,93 @@ exports.deleteOrder = async (req, res) => {
     }
 
     res.json({ message: "Order deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// aggregation
+exports.getOrderStatsByStatus = async (req, res) => {
+  try {
+    const stats = await Order.aggregate([
+      {
+        $group: {
+          _id: "$status",
+          count: { $sum: 1 },
+          //avgAmount: { $avg: "$totalAmount" },
+          totalAmount: { $sum: "$totalAmount" }
+        }
+      },
+      { $sort: { count: -1 } }
+    ]);
+
+    res.json(stats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// aggregation
+exports.getRevenueByProduct = async (req, res) => {
+  try {
+    const revenue = await Order.aggregate([
+      { $match: { status: { $in: ["delivered", "confirmed"] } } },
+      { $unwind: "$items" },
+      {
+        $group: {
+          _id: "$items.name",
+          totalQuantitySold: { $sum: "$items.quantity" },
+          totalRevenue: { $sum: { $multiply: ["$items.price", "$items.quantity"] } }
+        }
+      },
+      { $sort: { totalRevenue: -1 } },
+      { $limit: 10 }
+    ]);
+
+    res.json(revenue);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// aggregation
+exports.getCustomerOrderSummary = async (req, res) => {
+  try {
+    const customerStats = await Order.aggregate([
+      {
+        $group: {
+          _id: "$user",
+          totalOrders: { $sum: 1 },
+          totalSpent: { $sum: "$totalAmount" },
+          avgOrderValue: { $avg: "$totalAmount" },
+          lastOrderId: { $max: "$_id" }
+        }
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "userInfo"
+        }
+      },
+      { $unwind: "$userInfo" },
+      { $sort: { totalSpent: -1 } },
+      {
+        $project: {
+          _id: 0,
+          userId: "$_id",
+          name: "$userInfo.name",
+          email: "$userInfo.email",
+          totalOrders: 1,
+          totalSpent: 1,
+          avgOrderValue: { $round: ["$avgOrderValue", 2] },
+          lastOrderId: 1
+        }
+      }
+    ]);
+
+    res.json(customerStats);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

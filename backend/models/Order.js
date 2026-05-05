@@ -16,10 +16,12 @@ const orderItemSchema = new mongoose.Schema(
 
 const orderSchema = new mongoose.Schema(
   {
+    // index
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
+      index: true
     },
     items: {
       type: [orderItemSchema],
@@ -31,10 +33,12 @@ const orderSchema = new mongoose.Schema(
       }
     },
     totalAmount: { type: Number, required: true, min: 0 },
+    // index
     status: {
       type: String,
       enum: ["pending", "confirmed", "preparing", "delivered", "cancelled"],
-      default: "pending"
+      default: "pending",
+      index: true
     },
     shippingAddress: {
       type: String,
@@ -42,7 +46,7 @@ const orderSchema = new mongoose.Schema(
       trim: true
     }
   },
-  { timestamps: true }
+  { versionKey: false }
 );
 
 module.exports = mongoose.model("Order", orderSchema);

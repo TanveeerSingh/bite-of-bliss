@@ -3,12 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev:frontend": "http-server . -p 5500",
-    "dev:backend": "npm run dev --prefix backend",
-    "dev": "node dev-server.js",
-    "start": "cd backend && npm install && npm start"
+    "dev": "npm run dev --prefix backend",
+    "start": "npm start --prefix backend"
   },
-  "devDependencies": {
-    "http-server": "^14.1.1"
-  }
+  
 }

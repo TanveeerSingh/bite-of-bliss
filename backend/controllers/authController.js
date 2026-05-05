@@ -9,9 +9,10 @@ const createToken = (userId) => {
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    const normalizedEmail = String(email || "").trim().toLowerCase();
 
     // Keep account creation simple and predictable.
-    if (!name || !email || !password) {
+    if (!name || !normalizedEmail || !password) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -19,7 +20,7 @@ exports.register = async (req, res) => {
       return res.status(400).json({ error: "Password must be at least 6 characters" });
     }
 
-    const existingUser = await User.findOne({ email: email.toLowerCase() });
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({ error: "Email already registered" });
     }
@@ -28,7 +29,7 @@ exports.register = async (req, res) => {
 
     const user = await User.create({
       name,
-      email: email.toLowerCase(),
+      email: normalizedEmail,
       password: hashed
     });
 
@@ -52,13 +53,14 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const normalizedEmail = String(email || "").trim().toLowerCase();
 
     // Reject incomplete login attempts right away.
-    if (!email || !password) {
+    if (!normalizedEmail || !password) {
       return res.status(400).json({ error: "Email and password are required" });
     }
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) return res.status(400).json({ error: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
