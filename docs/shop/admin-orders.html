@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Orders - Bite of Bliss</title>
+    <link href="../stylesheet.css" rel="stylesheet" />
+    <link href="/customer-shop.css" rel="stylesheet" />
+    <style>
+      body {
+        background: #fff7ed;
+        color: #2f261f;
+      }
+
+      .admin-shell {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 16px;
+      }
+
+      .admin-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .admin-table-wrap {
+        background: #fff;
+        border: 1px solid #f0dec9;
+        border-radius: 14px;
+        margin-top: 20px;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #f4e7d8;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      select,
+      .save-status-btn {
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid #e8d4bf;
+      }
+
+      .save-status-btn {
+        background: #d66b00;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      .save-status-btn:hover {
+        background: #b85b00;
+      }
+
+      .admin-msg {
+        margin-top: 12px;
+        min-height: 20px;
+      }
+
+      .admin-msg.error {
+        color: #a82020;
+      }
+
+      .admin-msg.success {
+        color: #14633e;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="admin-shell">
+      <div class="admin-top">
+        <div>
+          <h1>Admin Orders</h1>
+          <p>View all customer orders and update status.</p>
+        </div>
+        <div>
+          <a href="../index.html#shop" class="admin-link">Back to Shop</a>
+          <button id="refreshOrdersBtn" class="admin-link">Refresh</button>
+        </div>
+      </div>
+
+      <p id="adminAccessMessage" class="admin-msg"></p>
+
+      <div class="admin-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr>
+              <td colspan="6">Loading orders...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="admin-orders.js"></script>
+  </body>
+</html>
