@@ -1,152 +1,90 @@
-# Bite of Bliss
+# 🍰 Bite of Bliss
 
-Bite of Bliss is a bakery web project with a customer-facing site, admin management pages, and a Node.js + MongoDB backend API.
+A complete bakery e-commerce website with customer ordering and admin dashboard.
 
-**📖 [Read the Complete Admin Guide](ADMIN_GUIDE.md)** - Learn how to set up admin accounts and manage your bakery!
+## 🌐 View Live
+- **Website:** https://tanveersingh.github.io/bite-of-bliss/
+- **GitHub:** https://github.com/TanveeerSingh/bite-of-bliss
 
-## Features
+## ✨ What It Does
 
-- Customer pages for browsing products and placing orders
-- Authentication flow (signup/signin)
-- Admin dashboard for order and inventory management
-- Product and order APIs with role-based protection
-- Blog section with 1 to 9 pages (including Coming Soon placeholders)
+✅ Browse bakery products  
+✅ Add items to cart and place orders  
+✅ Create customer account (signup/login)  
+✅ Admin can manage orders and inventory  
+✅ Real-time price updates  
+✅ Works on mobile and desktop  
 
-## Project Structure
+## 🛠️ Built With
 
-```text
-Bite_of_Blise-main 2/
-├── index.html
-├── signin.html
-├── signup.html
-├── stylesheet.css
-├── blog1.html ... blog9.html
-├── admin-portal/
-├── shop/
-├── images/
-└── backend/
-```
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js + Express
+- **Database:** MongoDB
+- **Security:** JWT tokens + password hashing
 
-## Tech Stack
+## 🚀 Get Started
 
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js, Express
-- Database: MongoDB + Mongoose
-- Auth: JWT + bcryptjs
-
-## Run Locally
-
-### Backend and frontend together
+### 1. Download & Install
 
 ```bash
-cd backend
+git clone https://github.com/TanveeerSingh/bite-of-bliss.git
+cd bite-of-bliss/backend
 npm install
+```
+
+### 2. Setup Database
+
+Create `.env` file in `backend/` folder:
+```
+PORT=5001
+MONGO_URI=mongodb://127.0.0.1:27017/bakeryDB
+JWT_SECRET=your_secret_key
+```
+
+### 3. Run Server
+
+```bash
 npm run dev
 ```
 
-Then open:
+Open: **http://localhost:5001/**
 
-- Homepage: http://localhost:5001/
-- Admin Login: http://localhost:5001/admin-portal/admin-login.html
+## 👨‍💼 Admin Login
 
-Backend defaults:
+1. Sign up as a customer first
+2. Go to MongoDB and change your `role` from `"customer"` to `"admin"`
+3. Login to: **http://localhost:5001/admin-portal/admin-login.html**
 
-- Port: `5001` (or `PORT` from `.env`)
-- Mongo URI: `MONGO_URI` from `.env` (fallback: local MongoDB)
+## 📂 Files Overview
 
-## Environment Variables (backend/.env)
-
-```env
-PORT=5001
-MONGO_URI=mongodb://127.0.0.1:27017/bakeryDB
-JWT_SECRET=your_secret_here
+```
+├── docs/          → Website (GitHub Pages)
+├── frontend/      → HTML, CSS, JavaScript files
+├── backend/       → Server & database code
+│   ├── server.js          → Main server
+│   ├── controllers/       → Business logic
+│   ├── models/           → Database schemas
+│   └── routes/           → API endpoints
+└── images/        → Photos & logos
 ```
 
-## API Overview
+## 💡 Key Features
 
-Base URL: `http://localhost:5001/api`
+| Feature | Details |
+|---------|---------|
+| **Signup/Login** | Create account with email & password |
+| **Shopping** | Browse products, add to cart, checkout |
+| **Orders** | Track order history and status |
+| **Admin Panel** | View all orders, update status, manage products |
+| **Real-time Updates** | Product prices update automatically |
 
-### Auth
+## 📞 Support
 
-- `POST /auth/register`
-- `POST /auth/login`
-
-### Products
-
-- `GET /products`
-- `GET /products/:id`
-- `POST /products` (admin)
-- `PUT /products/:id` (admin)
-- `DELETE /products/:id` (admin)
-- `POST /products/bootstrap` (seed default products)
-
-### Orders
-
-- `POST /orders` (authenticated user)
-- `GET /orders/my-orders` (authenticated user)
-- `GET /orders` (admin)
-- `PUT /orders/:id/status` (admin)
-- `DELETE /orders/:id` (admin)
-
-Auth header format:
-
-```text
-Authorization: Bearer <token>
-```
-
-## Website Preview
-
-Open the main site pages locally here:
-
-- [Homepage](index.html)
-- [Sign In](signin.html)
-- [Sign Up](signup.html)
-- [Admin Login](admin-portal/admin-login.html)
-- [Admin Dashboard](admin-portal/admin-dashboard.html)
-- [Admin Orders](shop/admin-orders.html)
-
-## Notes
-
-- Admin-only endpoints require a user with role `admin`.
-- To promote a user as admin, update that user record in MongoDB.
+See [ADMIN_GUIDE.md](ADMIN_GUIDE.md) for detailed setup instructions.
 
 ---
 
-## 👨‍💼 Admin Access Guide
-
-### How to Become an Admin
-
-There are two ways to get admin access:
-
-#### **Option 1: Manually Promote via MongoDB** (Recommended for testing)
-
-1. **Sign up** as a regular customer on the website
-2. **Access MongoDB**:
-   - Go to [MongoDB Atlas](https://cloud.mongodb.com) → Your Cluster
-   - Click "Collections" → `bakeryDB` → `users`
-   - Find your user document
-3. **Update the role**:
-   - Change the `role` field from `"customer"` to `"admin"`
-   - Save the changes
-4. **Sign in to Admin Portal**:
-   - Visit [Admin Login](admin-portal/admin-login.html)
-   - Use the same email and password you signed up with
-   - You now have full admin access!
-
-#### **Option 2: Create Admin Account Directly** (For production)
-
-```javascript
-// Connect to MongoDB and run:
-db.users.insertOne({
-  name: "Admin User",
-  email: "admin@biteofbliss.com",
-  password: "hashed_password_here", // Use bcryptjs to hash
-  role: "admin",
-  timestamps: new Date()
-})
-```
-
-### What Admins Can Do
+**Enjoy your bakery business! 🎉**
 
 Once logged in as admin, access the **Admin Dashboard** to:
 
