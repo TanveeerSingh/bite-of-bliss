@@ -4,9 +4,13 @@
 
 ---
 
-## 🌐 **[👉 VIEW LIVE WEBSITE 👈](https://tanveersingh.github.io/bite-of-bliss/)**
+## 🌐 Quick Links
 
-**No download needed! Click above to preview the website now.**
+### **[👉 VIEW HOMEPAGE 👈](https://tanveersingh.github.io/bite-of-bliss/)**
+**No download needed! Click above to see the live website.**
+
+### **[🔐 ADMIN LOGIN PAGE](https://tanveersingh.github.io/bite-of-bliss/admin-portal/admin-login.html)**
+**For admins to manage orders and inventory.**
 
 ---
 
