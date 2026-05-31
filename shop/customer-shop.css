@@ -1,0 +1,275 @@
+#shop {
+  background: linear-gradient(135deg, #fff8ef 0%, #f9efe2 100%);
+}
+
+.shop-header {
+  max-width: 980px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.shop-subtitle {
+  color: #6e6259;
+}
+
+.shop-login-prompt {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #ead8c4;
+  background: #fff;
+  text-align: center;
+}
+
+.shop-login-prompt a {
+  color: #d66b00;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.shop-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+
+.shop-content.checkout-only {
+  max-width: 560px;
+  grid-template-columns: 1fr;
+}
+
+.shop-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.shop-product-card,
+.shop-cart-panel {
+  background: #fff;
+  border: 1px solid #f1dfcb;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.shop-product-card h4 {
+  color: #2f261f;
+  margin: 0 0 8px;
+}
+
+.shop-product-card p {
+  color: #6e6259;
+  min-height: 54px;
+}
+
+.shop-product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.shop-product-price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #a74800;
+}
+
+.shop-quantity-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shop-qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #d9c8b3;
+  border-radius: 8px;
+  padding: 4px 6px;
+  background: #faf7f4;
+}
+
+.qty-btn-product {
+  border: none;
+  background: #d66b00;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.qty-btn-product:hover {
+  background: #b65a00;
+}
+
+.qty-display {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 600;
+  color: #2f261f;
+  font-size: 14px;
+}
+
+.shop-add-btn {
+  padding: 8px 14px;
+  font-size: 0.95rem;
+}
+
+.shop-add-btn,
+.place-order-btn,
+.qty-btn,
+.admin-link {
+  border: none;
+  border-radius: 10px;
+  background: #d66b00;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.shop-add-btn:hover,
+.place-order-btn:hover,
+.qty-btn:hover,
+.admin-link:hover {
+  background: #b65a00;
+}
+
+.shop-right {
+  display: grid;
+  gap: 14px;
+}
+
+.shop-cart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.shop-cart-item {
+  display: grid;
+}
+
+.shop-cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  padding: 5px 9px;
+}
+
+.shop-total {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.shop-address {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.shop-address textarea {
+  width: 100%;
+  min-height: 84px;
+  border: 1px solid #dfc9b2;
+  border-radius: 10px;
+  padding: 10px;
+  resize: vertical;
+}
+
+.place-order-btn {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.shop-message {
+  margin-top: 10px;
+  min-height: 20px;
+}
+
+.shop-message.success {
+  color: #18603f;
+}
+
+.shop-message.error {
+  color: #9f1f1f;
+}
+
+.shop-empty {
+  color: #7f6f62;
+}
+
+.my-order-row {
+  display: grid;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1dfcb;
+}
+
+.my-order-row:last-child {
+  border-bottom: none;
+}
+
+.my-order-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.my-order-id {
+  font-size: 0.9rem;
+  color: #6e6259;
+}
+
+.my-order-status {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #f5eee7;
+  color: #7b5b3d;
+}
+
+.my-order-status.pending { background: #fff4d9; color: #8a6500; }
+.my-order-status.confirmed { background: #e7f6ee; color: #166534; }
+.my-order-status.preparing { background: #e7f0ff; color: #1d4ed8; }
+.my-order-status.delivered { background: #dcfce7; color: #14532d; }
+.my-order-status.cancelled { background: #fee2e2; color: #991b1b; }
+
+.my-order-meta {
+  font-size: 0.9rem;
+  color: #5f5349;
+}
+
+.shop-admin-link-wrap {
+  margin-top: 10px;
+}
+
+@media (max-width: 900px) {
+  .shop-content {
+    grid-template-columns: 1fr;
+  }
+}
