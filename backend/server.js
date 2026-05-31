@@ -139,11 +139,19 @@ app.get("/api", (req, res) => {
 
 // Route handlers for specific pages
 app.get("/", (req, res) => {
-  res.sendFile(path.join(projectRoot, "frontend/pages/index.html"));
+  res.sendFile(path.join(projectRoot, "frontend/index.html"));
+});
+
+app.get("/index.html", (req, res) => {
+  res.sendFile(path.join(projectRoot, "frontend/index.html"));
 });
 
 app.get("/admin-login.html", (req, res) => {
-  res.sendFile(path.join(projectRoot, "frontend/admin-portal/admin-login.html"));
+  res.sendFile(path.join(projectRoot, "frontend/admin-portal/index.html"));
+});
+
+app.get("/admin-portal/admin-login.html", (req, res) => {
+  res.sendFile(path.join(projectRoot, "frontend/admin-portal/index.html"));
 });
 
 app.get("/admin-dashboard.html", (req, res) => {
