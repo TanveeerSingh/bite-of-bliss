@@ -2,6 +2,16 @@
 
 Bite of Bliss is a simple bakery website where customers can browse products, sign up/sign in, add items to a cart, and place orders. An admin user can view orders, update order status, and manage product stock from a dashboard.
 
+# Live Links
+
+- Home Website:
+
+  https://tanveeersingh.github.io/bite-of-bliss/
+
+- Admin Portal:
+
+  https://tanveeersingh.github.io/bite-of-bliss/admin-portal/
+
 ## Features
 - Customer-facing product listing, cart and order flow
 - Authentication (register / login)
