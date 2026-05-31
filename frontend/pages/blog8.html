@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Blog 8 - Coming Soon</title>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: grid;
+				place-items: center;
+				padding: 24px;
+				font-family: "Poppins", sans-serif;
+				color: #2f261f;
+				background:
+					radial-gradient(circle at 14% 18%, rgba(214, 107, 0, 0.2), transparent 35%),
+					radial-gradient(circle at 86% 82%, rgba(16, 185, 129, 0.12), transparent 30%),
+					linear-gradient(145deg, #fff8ef 0%, #f5ebde 100%);
+			}
+
+			.card {
+				width: min(720px, 100%);
+				background: rgba(255, 255, 255, 0.94);
+				border: 1px solid #ecd8c2;
+				border-radius: 22px;
+				padding: 36px;
+				box-shadow: 0 20px 60px rgba(80, 49, 16, 0.14);
+			}
+
+			.badge {
+				display: inline-block;
+				font-size: 0.8rem;
+				font-weight: 700;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #9a4e00;
+				background: #fff1e2;
+				border: 1px solid #f1d1ad;
+				border-radius: 999px;
+				padding: 7px 12px;
+			}
+
+			h1 {
+				margin: 14px 0 8px;
+				font-size: clamp(1.8rem, 4vw, 2.6rem);
+				line-height: 1.2;
+			}
+
+			p {
+				margin: 0;
+				color: #5f554c;
+				line-height: 1.7;
+			}
+
+			.actions {
+				margin-top: 24px;
+				display: flex;
+				gap: 10px;
+				flex-wrap: wrap;
+			}
+
+			.btn {
+				text-decoration: none;
+				border-radius: 10px;
+				padding: 10px 14px;
+				font-weight: 700;
+			}
+
+			.btn.primary {
+				background: #d66b00;
+				color: #fff;
+			}
+
+			.btn.secondary {
+				background: #fff;
+				color: #2f261f;
+				border: 1px solid #e4d1bc;
+			}
+		</style>
+	</head>
+	<body>
+		<main class="card">
+			<span class="badge">Blog 8</span>
+			<h1>Next Article Is In The Oven</h1>
+			<p>
+				This blog is still being crafted. We will publish it soon with practical baking ideas and behind-the-scenes notes.
+			</p>
+			<div class="actions">
+				<a class="btn primary" href="index.html#blog">Back To Blog List</a>
+				<a class="btn secondary" href="index.html">Go To Home</a>
+			</div>
+		</main>
+	</body>
+</html>
